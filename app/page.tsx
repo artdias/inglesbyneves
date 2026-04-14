@@ -1,118 +1,202 @@
-'use client'
+"use client";
+
+import { useEffect, useRef } from "react";
+import Link from "next/link";
 
 export default function Home() {
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let index = 0;
+
+    const interval = setInterval(() => {
+      if (!trackRef.current) return;
+
+      index++;
+      if (index > 3) index = 0;
+
+      trackRef.current.style.transform = `translateX(-${index * 80}%)`;
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div style={{
-      minHeight: "100vh",
-      background: "linear-gradient(135deg, #a78bfa, #60a5fa)",
-      padding: "20px",
-      display: "flex",
-      justifyContent: "center"
-    }}>
+    <main className="page">
+      <div className="container">
+        
+        {/* PERFIL */}
+        <div className="card fade">
+          <img src="/perfilr1.png" className="avatar" />
 
-      <div style={{ maxWidth: "500px", width: "100%" }}>
+          <h1>Profª Neves</h1>
+          <p>Aprenda inglês de forma simples e prática</p>
 
-        {/* CARD PRINCIPAL */}
-        <div style={{
-          background: "white",
-          borderRadius: "20px",
-          padding: "25px",
-          textAlign: "center",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
-          marginBottom: "20px"
-        }}>
+          <Link href="/teste-nivel">
+            <button>Descobrir meu nível de inglês (GRÁTIS)</button>
+          </Link>
 
-          <img 
-            src="/perfil.jpg"
-            style={{
-              width: "90px",
-              height: "90px",
-              borderRadius: "50%",
-              objectFit: "cover",
-              border: "3px solid #a78bfa",
-              marginBottom: "10px"
-            }}
-          />
-
-          <h2 style={{ margin: "10px 0" }}>Profª Neves 💜</h2>
-
-          <p style={{ fontSize: "14px", opacity: 0.7 }}>
-            Aprenda inglês de forma simples, prática e sem complicação ✨
-          </p>
-
-          {/* BOTÕES */}
-          <div style={{ marginTop: "20px" }}>
-
-            <a href="/teste" style={botao}>
-              🎯 Fazer teste de nível
-            </a>
-
-            <a href="/materiais" style={{...botao, marginTop: "10px"}}>
-              📚 Baixar materiais gratuitos
-            </a>
-
-          </div>
+          <Link href="/material">
+            <button>Baixar material gratuito</button>
+          </Link>
         </div>
 
         {/* VÍDEO */}
-        <div style={card}>
-          <h3>🎥 Veja como funciona</h3>
+        <div className="card fade">
+          <h2>Veja como funciona</h2>
 
           <iframe
             width="100%"
             height="200"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            style={{ borderRadius: "10px", marginTop: "10px" }}
+            src="https://www.youtube.com/embed/L_LUpnjgPso"
+            style={{ border: "none", borderRadius: 10 }}
+            allowFullScreen
           />
         </div>
 
         {/* AVALIAÇÕES */}
-        <div style={card}>
-          <h3>💬 O que meus alunos dizem</h3>
+        <div className="card fade">
+          <h2>O que meus alunos dizem</h2>
 
-          <div style={{ marginTop: "10px", fontSize: "14px" }}>
-            <p>"Amei as aulas!" ⭐⭐⭐⭐⭐</p>
-            <p>"Didática perfeita!" ⭐⭐⭐⭐⭐</p>
-            <p>"Super recomendo!" ⭐⭐⭐⭐⭐</p>
+          <div className="carousel">
+            <div ref={trackRef} className="track">
+              {reviews.map((r, i) => (
+                <div key={i} className="review">{r}</div>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* CONTATO */}
-        <div style={card}>
-          <h3>📲 Fale comigo</h3>
+        <div className="card fade">
+          <h2>Fale comigo</h2>
 
-          <a href="https://wa.me/seunumero" style={botao}>
+          <button
+            onClick={() =>
+              window.open(
+                "https://wa.me/5599999999999?text=Olá, quero aprender inglês!",
+                "_blank"
+              )
+            }
+          >
             WhatsApp
-          </a>
-
-          <p style={{ fontSize: "12px", marginTop: "10px", opacity: 0.6 }}>
-            Email: contato@email.com<br/>
-            Tel: (00) 00000-0000
-          </p>
+          </button>
         </div>
-
       </div>
-    </div>
-  )
+
+      {/* RODAPÉ */}
+      <div className="footer">
+        CNPJ: 00.000.000/0002-00<br />
+        Email: contato@email.com<br />
+        Telefone: (00) 00000-0000
+      </div>
+
+      {/* ESTILOS */}
+      <style jsx>{`
+        .page {
+          margin: 0;
+          font-family: Arial;
+          background: linear-gradient(135deg, #a78bfa, #7dd3fc);
+          min-height: 100vh;
+        }
+
+        .container {
+          max-width: 600px;
+          margin: auto;
+          padding: 20px;
+        }
+
+        .card {
+          background: white;
+          border-radius: 20px;
+          padding: 25px;
+          margin-bottom: 20px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+          text-align: center;
+        }
+
+        .fade {
+          animation: fadeUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        button {
+          width: 100%;
+          padding: 14px;
+          margin-top: 12px;
+          border: none;
+          border-radius: 12px;
+          background: #a78bfa;
+          color: white;
+          font-size: 16px;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        button:hover {
+          background: #8b5cf6;
+          transform: scale(1.02);
+        }
+
+        .avatar {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 4px solid #a78bfa;
+          margin-bottom: 10px;
+        }
+
+        .carousel {
+          overflow: hidden;
+        }
+
+        .track {
+          display: flex;
+          gap: 10px;
+          transition: transform 0.4s ease;
+        }
+
+        .review {
+          min-width: 80%;
+          background: #f8fafc;
+          padding: 10px;
+          border-radius: 10px;
+          font-size: 14px;
+        }
+
+        .footer {
+          text-align: center;
+          font-size: 12px;
+          color: white;
+          padding: 20px;
+        }
+
+        @media (min-width: 600px) {
+          .review {
+            min-width: 30%;
+          }
+        }
+      `}</style>
+    </main>
+  );
 }
 
-// estilos reutilizáveis
-const card = {
-  background: "white",
-  borderRadius: "20px",
-  padding: "20px",
-  marginBottom: "20px",
-  boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
-  textAlign: "center" as const
-}
-
-const botao = {
-  display: "block",
-  padding: "12px",
-  borderRadius: "12px",
-  background: "linear-gradient(90deg, #8b5cf6, #6366f1)",
-  color: "white",
-  textDecoration: "none",
-  fontWeight: "bold",
-  transition: "0.3s"
-}
+const reviews = [
+  "A melhor professora! ⭐⭐⭐⭐⭐",
+  "Aprendi muito rápido! ⭐⭐⭐⭐⭐",
+  "Didática perfeita! ⭐⭐⭐⭐⭐",
+  "Super recomendo! ⭐⭐⭐⭐⭐",
+  "Muito paciente! ⭐⭐⭐⭐⭐",
+  "Aulas incríveis! ⭐⭐⭐⭐⭐",
+];
