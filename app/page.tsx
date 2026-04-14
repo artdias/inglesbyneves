@@ -1,150 +1,118 @@
 'use client'
 
-import { useState } from 'react'
-
 export default function Home() {
-
-  const depoimentos = [
-    {
-      nome: "Ana Clara",
-      foto: "https://i.pravatar.cc/100?img=1",
-      texto: "Amei os materiais! Muito fáceis de entender 💖"
-    },
-    {
-      nome: "João Pedro",
-      foto: "https://i.pravatar.cc/100?img=2",
-      texto: "Finalmente estou evoluindo no inglês 🚀"
-    },
-    {
-      nome: "Mariana",
-      foto: "https://i.pravatar.cc/100?img=3",
-      texto: "Didática incrível, recomendo demais!"
-    }
-  ]
-
-  const [index, setIndex] = useState(0)
-
-  const next = () => setIndex((index + 1) % depoimentos.length)
-  const prev = () => setIndex((index - 1 + depoimentos.length) % depoimentos.length)
-
   return (
     <div style={{
-      fontFamily: "sans-serif",
-      background: "linear-gradient(135deg, #ede9fe, #e0f2fe)"
+      minHeight: "100vh",
+      background: "linear-gradient(135deg, #a78bfa, #60a5fa)",
+      padding: "20px",
+      display: "flex",
+      justifyContent: "center"
     }}>
 
-      {/* HERO */}
-      <section style={{
-        textAlign: "center",
-        padding: "60px 20px"
-      }}>
-        <h1 style={{ fontSize: "36px", marginBottom: "10px" }}>
-          ✨ Aprenda Inglês de Forma Simples
-        </h1>
-        <p style={{ marginBottom: "20px", opacity: 0.7 }}>
-          Materiais práticos para você evoluir rápido
-        </p>
+      <div style={{ maxWidth: "500px", width: "100%" }}>
 
-        {/* VÍDEO */}
+        {/* CARD PRINCIPAL */}
         <div style={{
-          maxWidth: "600px",
-          margin: "auto",
-          borderRadius: "20px",
-          overflow: "hidden",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
-        }}>
-          <iframe
-            width="100%"
-            height="315"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="Vídeo"
-          />
-        </div>
-
-        {/* BOTÕES */}
-        <div style={{ marginTop: "30px" }}>
-          <a href="/materiais" style={btnPrimary}>
-            📚 Ver Materiais
-          </a>
-        </div>
-      </section>
-
-      {/* REDES SOCIAIS */}
-      <section style={{ textAlign: "center", marginBottom: "40px" }}>
-        <h2>🌐 Me acompanhe</h2>
-
-        <div style={{ marginTop: "15px" }}>
-          <a href="#" style={btnSocial}>Instagram</a>
-          <a href="#" style={btnSocial}>Facebook</a>
-          <a href="#" style={btnSocial}>TikTok</a>
-          <a href="#" style={btnSocial}>YouTube</a>
-        </div>
-      </section>
-
-      {/* DEPOIMENTOS */}
-      <section style={{
-        padding: "40px",
-        textAlign: "center"
-      }}>
-        <h2>💬 O que dizem</h2>
-
-        <div style={{
-          maxWidth: "400px",
-          margin: "auto",
           background: "white",
           borderRadius: "20px",
-          padding: "20px",
-          boxShadow: "0 10px 25px rgba(0,0,0,0.15)"
+          padding: "25px",
+          textAlign: "center",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+          marginBottom: "20px"
         }}>
-          <img
-            src={depoimentos[index].foto}
+
+          <img 
+            src="/perfil.jpg"
             style={{
-              width: "80px",
+              width: "90px",
+              height: "90px",
               borderRadius: "50%",
+              objectFit: "cover",
+              border: "3px solid #a78bfa",
               marginBottom: "10px"
             }}
           />
 
-          <h3>{depoimentos[index].nome}</h3>
-          <p style={{ opacity: 0.7 }}>{depoimentos[index].texto}</p>
+          <h2 style={{ margin: "10px 0" }}>Profª Neves 💜</h2>
 
-          <div style={{ marginTop: "10px" }}>
-            <button onClick={prev}>⬅</button>
-            <button onClick={next}>➡</button>
+          <p style={{ fontSize: "14px", opacity: 0.7 }}>
+            Aprenda inglês de forma simples, prática e sem complicação ✨
+          </p>
+
+          {/* BOTÕES */}
+          <div style={{ marginTop: "20px" }}>
+
+            <a href="/teste" style={botao}>
+              🎯 Fazer teste de nível
+            </a>
+
+            <a href="/materiais" style={{...botao, marginTop: "10px"}}>
+              📚 Baixar materiais gratuitos
+            </a>
+
           </div>
         </div>
-      </section>
 
-      {/* CONTATO */}
-      <footer style={{
-        background: "#1e1b4b",
-        color: "white",
-        textAlign: "center",
-        padding: "30px"
-      }}>
-        <p>📧 email@email.com</p>
-        <p>📞 (11) 99999-9999</p>
-        <p>🏢 CNPJ: 00.000.000/0001-00</p>
-      </footer>
+        {/* VÍDEO */}
+        <div style={card}>
+          <h3>🎥 Veja como funciona</h3>
 
+          <iframe
+            width="100%"
+            height="200"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            style={{ borderRadius: "10px", marginTop: "10px" }}
+          />
+        </div>
+
+        {/* AVALIAÇÕES */}
+        <div style={card}>
+          <h3>💬 O que meus alunos dizem</h3>
+
+          <div style={{ marginTop: "10px", fontSize: "14px" }}>
+            <p>"Amei as aulas!" ⭐⭐⭐⭐⭐</p>
+            <p>"Didática perfeita!" ⭐⭐⭐⭐⭐</p>
+            <p>"Super recomendo!" ⭐⭐⭐⭐⭐</p>
+          </div>
+        </div>
+
+        {/* CONTATO */}
+        <div style={card}>
+          <h3>📲 Fale comigo</h3>
+
+          <a href="https://wa.me/seunumero" style={botao}>
+            WhatsApp
+          </a>
+
+          <p style={{ fontSize: "12px", marginTop: "10px", opacity: 0.6 }}>
+            Email: contato@email.com<br/>
+            Tel: (00) 00000-0000
+          </p>
+        </div>
+
+      </div>
     </div>
   )
 }
 
-const btnPrimary = {
-  padding: "12px 20px",
-  background: "linear-gradient(90deg, #8b5cf6, #6366f1)",
-  color: "white",
-  borderRadius: "10px",
-  textDecoration: "none",
-  fontWeight: "bold"
+// estilos reutilizáveis
+const card = {
+  background: "white",
+  borderRadius: "20px",
+  padding: "20px",
+  marginBottom: "20px",
+  boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
+  textAlign: "center" as const
 }
 
-const btnSocial = {
-  margin: "5px",
-  padding: "10px 15px",
-  background: "white",
-  borderRadius: "10px",
+const botao = {
+  display: "block",
+  padding: "12px",
+  borderRadius: "12px",
+  background: "linear-gradient(90deg, #8b5cf6, #6366f1)",
+  color: "white",
   textDecoration: "none",
-  display: "inline-block"
+  fontWeight: "bold",
+  transition: "0.3s"
 }
