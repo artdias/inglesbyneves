@@ -47,17 +47,19 @@ export default function TesteNivel() {
     if (current + 1 < questions.length) {
       setCurrent(current + 1);
     } else {
-      setStep("form"); // 🔥 aqui muda tudo
+      setStep("form");
     }
   }
 
-  // 🔥 FORMULÁRIO (CAPTURA)
+  const progress = ((current + 1) / questions.length) * 100;
+
+  // FORM
   if (step === "form") {
     return (
       <main className="page">
         <div className="card">
-          <h2>Quase pronto!</h2>
-          <p>Digite seus dados para ver seu resultado e receber um plano personalizado 👇</p>
+          <h2>🎯 Falta só um passo!</h2>
+          <p>Digite seus dados para ver seu resultado 👇</p>
 
           <input
             placeholder="Seu nome"
@@ -81,7 +83,7 @@ export default function TesteNivel() {
     );
   }
 
-  // 🔥 RESULTADO + VENDA
+  // RESULT
   if (step === "result") {
     const level = getLevel(score);
 
@@ -109,8 +111,8 @@ Quero um plano personalizado!`;
               "Excelente! Vamos refinar seu inglês."}
           </p>
 
-          <p style={{ fontWeight: "bold" }}>
-            Uma professora vai analisar suas respostas e montar um plano exclusivo para você.
+          <p className="highlight">
+            Uma professora vai analisar seu resultado e montar um plano exclusivo.
           </p>
 
           <button onClick={() => window.open(whatsappLink, "_blank")}>
@@ -129,7 +131,15 @@ Quero um plano personalizado!`;
       <div className="card">
         <h2>Pergunta {current + 1} de {questions.length}</h2>
 
-        <p>{questions[current].question}</p>
+        {/* BARRA DE PROGRESSO */}
+        <div className="progress">
+          <div
+            className="progress-bar"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+
+        <p className="question">{questions[current].question}</p>
 
         {questions[current].options.map((opt, i) => (
           <button key={i} onClick={() => handleAnswer(i)}>
@@ -152,16 +162,37 @@ const styles = (
       align-items: center;
       justify-content: center;
       font-family: Arial;
+      padding: 20px;
     }
 
     .card {
       background: white;
       border-radius: 20px;
       padding: 25px;
-      width: 90%;
+      width: 100%;
       max-width: 500px;
       text-align: center;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      animation: fadeUp 0.5s ease;
+    }
+
+    .question {
+      font-size: 18px;
+      margin: 20px 0;
+    }
+
+    .progress {
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 10px;
+      margin: 10px 0 20px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #a78bfa;
+      transition: width 0.3s;
     }
 
     input {
@@ -182,10 +213,28 @@ const styles = (
       color: white;
       font-size: 16px;
       cursor: pointer;
+      transition: 0.2s;
     }
 
     button:hover {
       background: #8b5cf6;
+      transform: scale(1.02);
+    }
+
+    .highlight {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   `}</style>
 );
