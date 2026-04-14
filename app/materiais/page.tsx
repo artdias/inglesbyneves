@@ -2,9 +2,16 @@
 
 import { useEffect, useState } from 'react'
 
-export default function Materiais() {
 
-  const [arquivos, setArquivos] = useState([])
+export default function Materiais() {
+	
+	type Arquivo = {
+	  nome: string
+	  url: string
+	  capa: string
+	}
+
+	const [arquivos, setArquivos] = useState<Arquivo[]>([])
 
   useEffect(() => {
     fetch('/api/materiais')
