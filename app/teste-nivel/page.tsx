@@ -125,13 +125,14 @@ const styles = {
   },
 
   card: {
+    card: {
     background: "#fff",
-    padding: 25,
-    borderRadius: 20,
+    padding: 20,
+    borderRadius: 16,
     width: "100%",
-    maxWidth: 420,
+    maxWidth: 400,
     boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
-    textAlign: "center",
+    textAlign: "center" as const
   },
 
   question: {
