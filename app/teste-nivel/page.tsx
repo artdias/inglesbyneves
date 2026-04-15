@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const questions = [
   {
-    question: "She ____ to school every day.",
+    question: "She ____ to school every day 173.",
     options: ["go", "goes", "going"],
     answer: 1,
   },
