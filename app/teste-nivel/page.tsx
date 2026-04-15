@@ -44,11 +44,13 @@ export default function TesteNivel() {
       setScore(score + 1);
     }
 
-    if (current + 1 < questions.length) {
-      setCurrent(current + 1);
-    } else {
-      setStep("form");
-    }
+    setTimeout(() => {
+      if (current + 1 < questions.length) {
+        setCurrent(current + 1);
+      } else {
+        setStep("form");
+      }
+    }, 300);
   }
 
   const progress = ((current + 1) / questions.length) * 100;
@@ -100,23 +102,24 @@ Quero um plano personalizado!`;
 
     return (
       <main className="page">
-        <div className="card">
+        <div className="card result">
           <h1>Seu nível: {level}</h1>
 
           <p>
-            {level === "Básico" && "Você está começando, mas pode evoluir rápido!"}
-            {level === "Intermediário" &&
-              "Você já tem uma boa base e pode avançar!"}
-            {level === "Avançado" &&
-              "Excelente! Vamos refinar seu inglês."}
+            {level === "Básico" && "Você está começando, mas pode evoluir rápido 🚀"}
+            {level === "Intermediário" && "Você já tem uma boa base 👏"}
+            {level === "Avançado" && "Excelente! Vamos refinar seu inglês 🔥"}
           </p>
 
-          <p className="highlight">
-            Uma professora vai analisar seu resultado e montar um plano exclusivo.
-          </p>
+          <div className="score">
+            {score} / {questions.length}
+          </div>
 
-          <button onClick={() => window.open(whatsappLink, "_blank")}>
-            Quero meu plano personalizado
+          <button
+            className="cta"
+            onClick={() => window.open(whatsappLink, "_blank")}
+          >
+            💬 Quero meu plano no WhatsApp
           </button>
         </div>
 
@@ -128,10 +131,10 @@ Quero um plano personalizado!`;
   // QUIZ
   return (
     <main className="page">
-      <div className="card">
-        <h2>Pergunta {current + 1} de {questions.length}</h2>
+      <div className="card quiz">
+        <h2>Pergunta {current + 1}/{questions.length}</h2>
 
-        {/* BARRA DE PROGRESSO */}
+        {/* PROGRESSO */}
         <div className="progress">
           <div
             className="progress-bar"
@@ -141,11 +144,17 @@ Quero um plano personalizado!`;
 
         <p className="question">{questions[current].question}</p>
 
-        {questions[current].options.map((opt, i) => (
-          <button key={i} onClick={() => handleAnswer(i)}>
-            {opt}
-          </button>
-        ))}
+        <div className="options">
+          {questions[current].options.map((opt, i) => (
+            <button
+              key={i}
+              className="option"
+              onClick={() => handleAnswer(i)}
+            >
+              {opt}
+            </button>
+          ))}
+        </div>
       </div>
 
       {styles}
@@ -156,12 +165,12 @@ Quero um plano personalizado!`;
 const styles = (
   <style jsx>{`
     .page {
-      background: linear-gradient(135deg, #a78bfa, #7dd3fc);
+      background: linear-gradient(135deg, #f3e8ff, #ede9fe);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: Arial;
+      font-family: 'Poppins', sans-serif;
       padding: 20px;
     }
 
@@ -170,22 +179,46 @@ const styles = (
       border-radius: 20px;
       padding: 25px;
       width: 100%;
-      max-width: 500px;
+      max-width: 420px;
       text-align: center;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-      animation: fadeUp 0.5s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      animation: fadeUp 0.4s ease;
+    }
+
+    .quiz {
+      text-align: left;
     }
 
     .question {
-      font-size: 18px;
+      font-size: 20px;
       margin: 20px 0;
+      font-weight: 500;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option {
+      padding: 14px;
+      border-radius: 12px;
+      border: 2px solid #e5e7eb;
+      background: #faf5ff;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background: #e9d5ff;
+      transform: scale(1.02);
     }
 
     .progress {
       height: 8px;
       background: #e5e7eb;
       border-radius: 10px;
-      margin: 10px 0 20px;
       overflow: hidden;
     }
 
@@ -213,17 +246,18 @@ const styles = (
       color: white;
       font-size: 16px;
       cursor: pointer;
-      transition: 0.2s;
     }
 
-    button:hover {
-      background: #8b5cf6;
-      transform: scale(1.02);
+    .cta {
+      background: #22c55e;
+      font-size: 18px;
     }
 
-    .highlight {
-      margin-top: 15px;
+    .score {
+      font-size: 28px;
       font-weight: bold;
+      margin: 15px 0;
+      color: #7c3aed;
     }
 
     @keyframes fadeUp {
