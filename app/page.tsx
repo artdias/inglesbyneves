@@ -27,7 +27,7 @@ export default function Home() {
         
         {/* PERFIL */}
         <div className="card fade">
-          <img src="/perfilr1.png" className="avatar" />
+          <img src="/perfil.jpg" className="avatar" />
 
           <h1>Profª Neves</h1>
           <p>Aprenda inglês de forma simples e prática</p>
