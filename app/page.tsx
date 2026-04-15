@@ -117,7 +117,7 @@ export default function Home() {
         .page {
           margin: 0;
           font-family: 'Poppins', sans-serif;
-          background: #f7f0ff;
+          background: linear-gradient(135deg, #e9d5ff, #f5d0fe);
           min-height: 100vh;
         }
 
@@ -128,7 +128,8 @@ export default function Home() {
         }
 
         .card {
-          background: white;
+			background: rgba(255, 255, 255, 0.9);
+			backdrop-filter: blur(8px);
           border-radius: 20px;
           padding: 25px;
           margin-bottom: 20px;
