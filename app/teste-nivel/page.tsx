@@ -125,7 +125,6 @@ const styles = {
   },
 
   card: {
-    card: {
     background: "#fff",
     padding: 20,
     borderRadius: 16,
