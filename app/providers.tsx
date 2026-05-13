@@ -32,7 +32,20 @@ const translations = {
     courseModules: "Course Modules",
     progress: "My Progress",
     resume: "Resume Lesson",
-    zoom: "Join Zoom Room"
+    zoom: "Join Zoom Room",
+    profile: "My Profile",
+    accountSettings: "Account Settings",
+    personalInfo: "Personal Information",
+    subscription: "Subscription",
+    certificates: "Certificates",
+    saveChanges: "Save Changes",
+    logout: "Logout",
+    planPremium: "Premium Plan",
+    memberSince: "Member Since",
+    totalHours: "Total Hours",
+    vocabLearned: "Vocab Learned",
+    activeStreak: "Active Streak",
+    editProfile: "Edit Profile"
   },
   pt: {
     heroTitle: "Domine o Inglês com",
@@ -52,7 +65,20 @@ const translations = {
     courseModules: "Módulos do Curso",
     progress: "Meu Progresso",
     resume: "Continuar Aula",
-    zoom: "Entrar no Zoom"
+    zoom: "Entrar no Zoom",
+    profile: "Meu Perfil",
+    accountSettings: "Configurações da Conta",
+    personalInfo: "Informações Pessoais",
+    subscription: "Assinatura",
+    certificates: "Certificados",
+    saveChanges: "Salvar Alterações",
+    logout: "Sair",
+    planPremium: "Plano Premium",
+    memberSince: "Membro Desde",
+    totalHours: "Horas Totais",
+    vocabLearned: "Vocabulário",
+    activeStreak: "Ofensiva",
+    editProfile: "Editar Perfil"
   }
 };
 
