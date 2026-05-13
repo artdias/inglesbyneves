@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { PlayCircle, BookA, Calendar as CalendarIcon, MessageSquare, ExternalLink, ChevronRight, Volume2, Clock } from "lucide-react";
 import { useAppContext } from "../providers";
 
@@ -26,18 +27,18 @@ export default function Dashboard() {
         {/* Quick Links */}
         <div className="bg-white dark:bg-[#0a0f1c] rounded-sm p-3 shadow-sm border border-brand-taupe/20 transition-colors duration-300">
           <p className="px-3 py-3 text-xs font-bold text-brand-taupe uppercase tracking-widest">Quick Start</p>
-          <a href="#" className="flex items-center gap-4 p-3 rounded-sm hover:bg-brand-beige/50 dark:hover:bg-brand-navy/30 text-brand-navy dark:text-brand-beige hover:text-brand-mauve dark:hover:text-brand-peach font-medium transition-colors group">
+          <Link href="/dashboard/modules/3" className="flex items-center gap-4 p-3 rounded-sm hover:bg-brand-beige/50 dark:hover:bg-brand-navy/30 text-brand-navy dark:text-brand-beige hover:text-brand-mauve dark:hover:text-brand-peach font-medium transition-colors group">
             <div className="w-10 h-10 rounded-sm bg-brand-beige dark:bg-brand-navy text-brand-mauve flex items-center justify-center group-hover:scale-105 transition-transform border border-brand-taupe/20">
               <PlayCircle size={18} strokeWidth={1.5} />
             </div>
             {t("resume")}
-          </a>
-          <a href="#" className="flex items-center gap-4 p-3 rounded-sm hover:bg-brand-beige/50 dark:hover:bg-brand-navy/30 text-brand-navy dark:text-brand-beige hover:text-brand-dark dark:hover:text-brand-peach font-medium transition-colors group">
+          </Link>
+          <Link href="/dashboard/schedule" className="flex items-center gap-4 p-3 rounded-sm hover:bg-brand-beige/50 dark:hover:bg-brand-navy/30 text-brand-navy dark:text-brand-beige hover:text-brand-dark dark:hover:text-brand-peach font-medium transition-colors group">
             <div className="w-10 h-10 rounded-sm bg-brand-peach/30 dark:bg-brand-navy text-brand-dark dark:text-brand-peach flex items-center justify-center group-hover:scale-105 transition-transform border border-brand-taupe/20">
               <ExternalLink size={18} strokeWidth={1.5} />
             </div>
             {t("zoom")}
-          </a>
+          </Link>
         </div>
 
         {/* Modules List */}
@@ -49,10 +50,10 @@ export default function Dashboard() {
             { tag: "M3", title: "Travel & Business", act: true },
             { tag: "M4", title: "Advanced Grammar", act: false },
           ].map((m, i) => (
-             <a href="#" key={i} className={`flex items-center gap-4 p-3 rounded-sm transition-colors ${m.act ? 'bg-brand-beige dark:bg-brand-navy/50 text-brand-navy dark:text-brand-beige font-semibold border-l-2 border-brand-mauve' : 'hover:bg-brand-beige/30 dark:hover:bg-brand-navy/20 text-brand-navy/70 dark:text-brand-taupe hover:text-brand-navy dark:hover:text-brand-beige font-medium border-l-2 border-transparent'}`}>
+             <Link href={`/dashboard/modules/${i + 1}`} key={i} className={`flex items-center gap-4 p-3 rounded-sm transition-colors ${m.act ? 'bg-brand-beige dark:bg-brand-navy/50 text-brand-navy dark:text-brand-beige font-semibold border-l-2 border-brand-mauve' : 'hover:bg-brand-beige/30 dark:hover:bg-brand-navy/20 text-brand-navy/70 dark:text-brand-taupe hover:text-brand-navy dark:hover:text-brand-beige font-medium border-l-2 border-transparent'}`}>
                <span className={`text-xs px-2.5 py-1 rounded-sm font-bold tracking-wider ${m.act ? 'bg-brand-mauve text-white' : 'bg-brand-taupe/20 text-brand-taupe'}`}>{m.tag}</span>
                {m.title}
-             </a>
+             </Link>
           ))}
         </div>
       </div>
@@ -65,9 +66,9 @@ export default function Dashboard() {
               <h2 className="text-2xl font-serif font-bold text-brand-navy dark:text-brand-beige">{t("schedule")}</h2>
               <p className="text-sm text-brand-taupe mt-1 tracking-wide">Upcoming classes and events</p>
             </div>
-            <button className="bg-brand-beige/50 dark:bg-brand-navy/50 hover:bg-brand-beige dark:hover:bg-brand-navy p-2.5 rounded-sm text-brand-mauve dark:text-brand-peach transition-colors border border-brand-taupe/20">
+            <Link href="/dashboard/schedule" className="bg-brand-beige/50 dark:bg-brand-navy/50 hover:bg-brand-beige dark:hover:bg-brand-navy p-2.5 rounded-sm text-brand-mauve dark:text-brand-peach transition-colors border border-brand-taupe/20 inline-block">
               <CalendarIcon size={18} />
-            </button>
+            </Link>
           </div>
 
           {/* Simple Visual Calendar */}

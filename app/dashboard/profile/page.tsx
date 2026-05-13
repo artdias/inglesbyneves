@@ -1,6 +1,7 @@
 "use client";
 
 import { useAppContext } from "../../providers";
+import Link from "next/link";
 import { 
   User, Mail, Phone, Calendar as CalendarIcon, 
   CreditCard, Award, Settings, Edit3, 
@@ -22,10 +23,10 @@ export default function ProfilePage() {
           </h1>
           <p className="text-brand-taupe mt-2 tracking-wide text-sm">{t("accountSettings")}</p>
         </div>
-        <button className="hidden sm:flex items-center gap-2 bg-brand-mauve hover:bg-brand-dark text-white px-5 py-2.5 rounded-sm font-medium transition-all text-sm tracking-widest uppercase">
+        <Link href="/dashboard/settings" className="hidden sm:flex items-center gap-2 bg-brand-mauve hover:bg-brand-dark text-white px-5 py-2.5 rounded-sm font-medium transition-all text-sm tracking-widest uppercase">
           <Edit3 size={16} />
           {t("editProfile")}
-        </button>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -44,9 +45,9 @@ export default function ProfilePage() {
                      <span className="text-4xl font-serif font-bold text-brand-mauve">S</span>
                   </div>
                 </div>
-                <div className="absolute bottom-0 right-0 bg-white dark:bg-[#0a0f1c] p-1.5 rounded-full border border-brand-taupe/30 shadow-sm text-brand-taupe hover:text-brand-mauve transition-colors">
+                <Link href="/dashboard/settings" className="absolute bottom-0 right-0 bg-white dark:bg-[#0a0f1c] p-1.5 rounded-full border border-brand-taupe/30 shadow-sm text-brand-taupe hover:text-brand-mauve transition-colors">
                   <Edit3 size={14} />
-                </div>
+                </Link>
               </div>
               
               <h2 className="text-2xl font-serif font-bold text-brand-navy dark:text-brand-beige">Student User</h2>
@@ -103,9 +104,9 @@ export default function ProfilePage() {
                   <User className="text-brand-mauve" />
                   {t("personalInfo")}
                 </div>
-                <button className="sm:hidden text-brand-mauve hover:bg-brand-beige/50 dark:hover:bg-brand-navy/30 p-2 rounded-sm transition-colors border border-brand-taupe/20">
+                <Link href="/dashboard/settings" className="sm:hidden text-brand-mauve hover:bg-brand-beige/50 dark:hover:bg-brand-navy/30 p-2 rounded-sm transition-colors border border-brand-taupe/20 inline-block">
                   <Edit3 size={16} />
-                </button>
+                </Link>
              </div>
              
              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -149,9 +150,9 @@ export default function ProfilePage() {
                 <h3 className="font-serif font-bold text-brand-navy dark:text-white text-xl">{t("subscription")}</h3>
               </div>
               <p className="text-brand-navy/70 dark:text-brand-taupe text-sm mb-6 leading-relaxed">You are currently on the <strong className="text-brand-mauve">Premium Plan</strong>. Next billing date is Nov 1, 2026.</p>
-              <div className="flex items-center gap-2 text-brand-dark dark:text-brand-peach text-[10px] font-bold uppercase tracking-widest group-hover:text-brand-mauve transition-colors">
+              <Link href="/dashboard/settings" className="flex items-center gap-2 text-brand-dark dark:text-brand-peach text-[10px] font-bold uppercase tracking-widest group-hover:text-brand-mauve transition-colors">
                 Manage Plan <ChevronRight size={14} strokeWidth={3} />
-              </div>
+              </Link>
             </div>
             
             <div className="bg-white dark:bg-[#0a0f1c] rounded-sm p-8 shadow-sm border border-brand-taupe/20 hover:border-brand-taupe transition-colors group cursor-pointer">
@@ -162,9 +163,9 @@ export default function ProfilePage() {
                 <h3 className="font-serif font-bold text-brand-navy dark:text-white text-xl">{t("certificates")}</h3>
               </div>
               <p className="text-brand-navy/70 dark:text-brand-taupe text-sm mb-6 leading-relaxed">You have earned <strong className="text-brand-mauve">2 certificates</strong> so far. Keep up the great work!</p>
-              <div className="flex items-center gap-2 text-brand-mauve text-[10px] font-bold uppercase tracking-widest group-hover:text-brand-dark dark:group-hover:text-brand-peach transition-colors">
+              <Link href="/dashboard/certificates" className="flex items-center gap-2 text-brand-mauve text-[10px] font-bold uppercase tracking-widest group-hover:text-brand-dark dark:group-hover:text-brand-peach transition-colors">
                 View All <ChevronRight size={14} strokeWidth={3} />
-              </div>
+              </Link>
             </div>
 
           </div>
@@ -172,27 +173,27 @@ export default function ProfilePage() {
           {/* Preferences Menu */}
           <div className="bg-white dark:bg-[#0a0f1c] rounded-sm shadow-sm border border-brand-taupe/20 overflow-hidden">
              <div className="divide-y divide-brand-taupe/20">
-               <button className="w-full flex items-center justify-between p-5 hover:bg-brand-beige/20 dark:hover:bg-brand-navy/20 transition-colors group">
+               <Link href="/dashboard/settings" className="w-full flex items-center justify-between p-5 hover:bg-brand-beige/20 dark:hover:bg-brand-navy/20 transition-colors group">
                  <div className="flex items-center gap-4 text-brand-navy dark:text-brand-beige group-hover:text-brand-mauve font-medium text-sm tracking-wide">
                    <Settings size={18} className="text-brand-taupe group-hover:text-brand-mauve" />
                    Account Settings
                  </div>
                  <ChevronRight size={16} className="text-brand-taupe" />
-               </button>
-               <button className="w-full flex items-center justify-between p-5 hover:bg-brand-beige/20 dark:hover:bg-brand-navy/20 transition-colors group">
+               </Link>
+               <Link href="/dashboard/settings" className="w-full flex items-center justify-between p-5 hover:bg-brand-beige/20 dark:hover:bg-brand-navy/20 transition-colors group">
                  <div className="flex items-center gap-4 text-brand-navy dark:text-brand-beige group-hover:text-brand-mauve font-medium text-sm tracking-wide">
                    <Bell size={18} className="text-brand-taupe group-hover:text-brand-mauve" />
                    Notification Preferences
                  </div>
                  <ChevronRight size={16} className="text-brand-taupe" />
-               </button>
-               <button className="w-full flex items-center justify-between p-5 hover:bg-brand-beige/20 dark:hover:bg-brand-navy/20 transition-colors group">
+               </Link>
+               <Link href="/dashboard/settings" className="w-full flex items-center justify-between p-5 hover:bg-brand-beige/20 dark:hover:bg-brand-navy/20 transition-colors group">
                  <div className="flex items-center gap-4 text-brand-navy dark:text-brand-beige group-hover:text-brand-mauve font-medium text-sm tracking-wide">
                    <Shield size={18} className="text-brand-taupe group-hover:text-brand-mauve" />
                    Privacy & Security
                  </div>
                  <ChevronRight size={16} className="text-brand-taupe" />
-               </button>
+               </Link>
                <button className="w-full flex items-center justify-between p-5 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors group">
                  <div className="flex items-center gap-4 text-red-600/80 dark:text-red-500/80 group-hover:text-red-600 font-medium text-sm tracking-wide uppercase text-[10px] tracking-widest font-bold">
                    <LogOut size={18} />
