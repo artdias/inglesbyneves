@@ -1,202 +1,236 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import Link from "next/link";
+import {
+  MessageCircle,
+ BookOpen,
+  User,
+} from "lucide-react";
 
 export default function Home() {
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let index = 0;
-
-    const interval = setInterval(() => {
-      if (!trackRef.current) return;
-
-      index++;
-      if (index > 3) index = 0;
-
-      trackRef.current.style.transform = `translateX(-${index * 80}%)`;
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <main className="page">
-      <div className="container">
-        
-        {/* PERFIL */}
-        <div className="card fade">
-          <img src="/perfilr1.png" className="avatar" />
+    <main className="min-h-screen bg-[#f8f5f2] relative overflow-hidden">
 
-          <h1>Profª Neves</h1>
-          <p>Aprenda inglês de forma simples e prática</p>
+      {/* BACKGROUND BLUR */}
+      <div className="absolute top-[-100px] left-[-100px] w-72 h-72 bg-pink-200 rounded-full blur-3xl opacity-40"></div>
+      <div className="absolute bottom-[-120px] right-[-100px] w-80 h-80 bg-blue-200 rounded-full blur-3xl opacity-40"></div>
 
-          <Link href="/teste-nivel">
-            <button>Descobrir meu nível de inglês (GRÁTIS)</button>
-          </Link>
+      <div className="relative z-10 px-5 py-6">
 
-          <Link href="/material">
-            <button>Baixar material gratuito</button>
-          </Link>
-        </div>
-
-        {/* VÍDEO */}
-        <div className="card fade">
-          <h2>Veja como funciona</h2>
-
-          <iframe
-            width="100%"
-            height="200"
-            src="https://www.youtube.com/embed/L_LUpnjgPso"
-            style={{ border: "none", borderRadius: 10 }}
-            allowFullScreen
-          />
-        </div>
-
-        {/* AVALIAÇÕES */}
-        <div className="card fade">
-          <h2>O que meus alunos dizem</h2>
-
-          <div className="carousel">
-            <div ref={trackRef} className="track">
-              {reviews.map((r, i) => (
-                <div key={i} className="review">{r}</div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* CONTATO */}
-        <div className="card fade">
-          <h2>Fale comigo</h2>
-
-          <button
-            onClick={() =>
-              window.open(
-                "https://wa.me/5599999999999?text=Olá, quero aprender inglês!",
-                "_blank"
-              )
-            }
-          >
-            WhatsApp
+        {/* TOPO */}
+        <header className="max-w-md mx-auto flex justify-end">
+          <button className="bg-white/70 backdrop-blur-lg p-3 rounded-full border border-white/50 shadow-lg hover:scale-105 transition duration-300">
+            <User size={20} />
           </button>
-        </div>
+        </header>
+
+        {/* PERFIL */}
+        <section className="max-w-md mx-auto text-center mt-6">
+
+          <div className="relative w-fit mx-auto">
+            <div className="absolute inset-0 bg-gradient-to-r from-pink-300 to-blue-300 rounded-full blur-xl opacity-60"></div>
+
+            <img
+              src="/perfil.jpg"
+              alt="Professora Ester Neves"
+              className="relative w-36 h-36 rounded-full object-cover border-4 border-white shadow-2xl"
+            />
+          </div>
+
+          <h1 className="text-4xl font-bold mt-6 text-[#1f1f1f]">
+            Ester Neves
+          </h1>
+
+          <p className="text-gray-600 mt-4 leading-relaxed px-4">
+            Professora de inglês para brasileiros que querem aprender de forma natural e sem travar.
+          </p>
+
+        </section>
+
+        {/* LINKS */}
+        <section className="max-w-md mx-auto mt-10 space-y-4">
+
+          {/* WHATSAPP */}
+          <a
+            href="https://wa.me/5500000000000"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center justify-between bg-[#25D366] text-white p-5 rounded-3xl shadow-xl hover:scale-[1.02] transition duration-300"
+          >
+            <div className="flex items-center gap-4">
+              <MessageCircle size={28} />
+              <div>
+                <p className="font-semibold text-lg">
+                  WhatsApp
+                </p>
+                <p className="text-sm opacity-80">
+                  Fale comigo diretamente
+                </p>
+              </div>
+            </div>
+
+            <span className="text-xl group-hover:translate-x-1 transition">
+              →
+            </span>
+          </a>
+
+          {/* INSTAGRAM */}
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center justify-between bg-white/70 backdrop-blur-xl border border-white/60 p-5 rounded-3xl shadow-lg hover:scale-[1.02] transition duration-300"
+          >
+            <div className="flex items-center gap-4">
+              <span className="text-3xl">📸</span>
+
+              <div>
+                <p className="font-semibold text-lg">
+                  Instagram
+                </p>
+
+                <p className="text-sm text-gray-500">
+                  Conteúdo diário
+                </p>
+              </div>
+            </div>
+
+            <span className="text-xl group-hover:translate-x-1 transition">
+              →
+            </span>
+          </a>
+
+          {/* YOUTUBE */}
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center justify-between bg-white/70 backdrop-blur-xl border border-white/60 p-5 rounded-3xl shadow-lg hover:scale-[1.02] transition duration-300"
+          >
+            <div className="flex items-center gap-4">
+              <span className="text-3xl">▶</span>
+
+              <div>
+                <p className="font-semibold text-lg">
+                  YouTube
+                </p>
+
+                <p className="text-sm text-gray-500">
+                  Aulas e dicas
+                </p>
+              </div>
+            </div>
+
+            <span className="text-xl group-hover:translate-x-1 transition">
+              →
+            </span>
+          </a>
+
+          {/* TIKTOK */}
+          <a
+            href="https://tiktok.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center justify-between bg-white/70 backdrop-blur-xl border border-white/60 p-5 rounded-3xl shadow-lg hover:scale-[1.02] transition duration-300"
+          >
+            <div className="flex items-center gap-4">
+              <span className="text-3xl">🎵</span>
+
+              <div>
+                <p className="font-semibold text-lg">
+                  TikTok
+                </p>
+
+                <p className="text-sm text-gray-500">
+                  Vídeos rápidos
+                </p>
+              </div>
+            </div>
+
+            <span className="text-xl group-hover:translate-x-1 transition">
+              →
+            </span>
+          </a>
+
+          {/* FACEBOOK */}
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center justify-between bg-white/70 backdrop-blur-xl border border-white/60 p-5 rounded-3xl shadow-lg hover:scale-[1.02] transition duration-300"
+          >
+            <div className="flex items-center gap-4">
+              <span className="text-3xl">👍</span>
+
+              <div>
+                <p className="font-semibold text-lg">
+                  Facebook
+                </p>
+
+                <p className="text-sm text-gray-500">
+                  Comunidade e novidades
+                </p>
+              </div>
+            </div>
+
+            <span className="text-xl group-hover:translate-x-1 transition">
+              →
+            </span>
+          </a>
+
+          {/* TESTE */}
+          <a
+            href="#"
+            className="group flex items-center justify-between bg-[#1F2A5A] text-white p-5 rounded-3xl shadow-2xl hover:scale-[1.02] transition duration-300"
+          >
+            <div className="flex items-center gap-4">
+              <span className="text-3xl">📝</span>
+
+              <div>
+                <p className="font-semibold text-lg">
+                  Teste de nível
+                </p>
+
+                <p className="text-sm opacity-70">
+                  Descubra seu inglês
+                </p>
+              </div>
+            </div>
+
+            <span className="text-xl group-hover:translate-x-1 transition">
+              →
+            </span>
+          </a>
+
+          {/* EBOOKS */}
+          <a
+            href="#"
+            className="group flex items-center justify-between bg-white/70 backdrop-blur-xl border border-white/60 p-5 rounded-3xl shadow-lg hover:scale-[1.02] transition duration-300"
+          >
+            <div className="flex items-center gap-4">
+              <BookOpen size={28} />
+
+              <div>
+                <p className="font-semibold text-lg">
+                  Materiais gratuitos
+                </p>
+
+                <p className="text-sm text-gray-500">
+                  Ebooks e conteúdos
+                </p>
+              </div>
+            </div>
+
+            <span className="text-xl group-hover:translate-x-1 transition">
+              →
+            </span>
+          </a>
+
+        </section>
+
+        {/* FOOTER */}
+        <footer className="text-center mt-12 text-sm text-gray-500">
+          © 2026 Inglês by Neves
+        </footer>
+
       </div>
-
-      {/* RODAPÉ */}
-      <div className="footer">
-        CNPJ: 00.000.000/0002-00<br />
-        Email: contato@email.com<br />
-        Telefone: (00) 00000-0000
-      </div>
-
-      {/* ESTILOS */}
-      <style jsx>{`
-        .page {
-          margin: 0;
-          font-family: Arial;
-          background: linear-gradient(135deg, #a78bfa, #7dd3fc);
-          min-height: 100vh;
-        }
-
-        .container {
-          max-width: 600px;
-          margin: auto;
-          padding: 20px;
-        }
-
-        .card {
-          background: white;
-          border-radius: 20px;
-          padding: 25px;
-          margin-bottom: 20px;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-          text-align: center;
-        }
-
-        .fade {
-          animation: fadeUp 0.8s ease forwards;
-        }
-
-        @keyframes fadeUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        button {
-          width: 100%;
-          padding: 14px;
-          margin-top: 12px;
-          border: none;
-          border-radius: 12px;
-          background: #a78bfa;
-          color: white;
-          font-size: 16px;
-          cursor: pointer;
-          transition: 0.3s;
-        }
-
-        button:hover {
-          background: #8b5cf6;
-          transform: scale(1.02);
-        }
-
-        .avatar {
-          width: 120px;
-          height: 120px;
-          border-radius: 50%;
-          object-fit: cover;
-          border: 4px solid #a78bfa;
-          margin-bottom: 10px;
-        }
-
-        .carousel {
-          overflow: hidden;
-        }
-
-        .track {
-          display: flex;
-          gap: 10px;
-          transition: transform 0.4s ease;
-        }
-
-        .review {
-          min-width: 80%;
-          background: #f8fafc;
-          padding: 10px;
-          border-radius: 10px;
-          font-size: 14px;
-        }
-
-        .footer {
-          text-align: center;
-          font-size: 12px;
-          color: white;
-          padding: 20px;
-        }
-
-        @media (min-width: 600px) {
-          .review {
-            min-width: 30%;
-          }
-        }
-      `}</style>
     </main>
   );
 }
-
-const reviews = [
-  "A melhor professora! ⭐⭐⭐⭐⭐",
-  "Aprendi muito rápido! ⭐⭐⭐⭐⭐",
-  "Didática perfeita! ⭐⭐⭐⭐⭐",
-  "Super recomendo! ⭐⭐⭐⭐⭐",
-  "Muito paciente! ⭐⭐⭐⭐⭐",
-  "Aulas incríveis! ⭐⭐⭐⭐⭐",
-];
