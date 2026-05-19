@@ -35,7 +35,7 @@ export default function Home() {
               <img
                 src="/perfil.jpg"
                 alt="Professora Ester Neves"
-                className="w-full h-[420px] object-cover rounded-[2rem]"
+                className="w-full h-[320px] object-cover rounded-[2rem]"
               />
 
             </div>
