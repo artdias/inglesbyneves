@@ -29,17 +29,19 @@ export default function Home() {
 
             <img
               src="/perfil.jpg"
-              alt="Professora Ester Neves"
+              alt="Teacher Ester Neves"
               className="relative w-36 h-36 rounded-full object-cover border-4 border-white shadow-2xl"
             />
           </div>
 
           <h1 className="text-4xl font-bold mt-6 text-[#1f1f1f]">
-            Ester Neves
+            Teacher Ester Neves
           </h1>
 
           <p className="text-gray-600 mt-4 leading-relaxed px-4">
-            Professora de inglês para brasileiros que querem aprender de forma natural e sem travar.
+            Professora de inglês para quem quer aprender de forma natural e sem travar.
+            Sou britânica, filha de pais brasileiros, com inglês nativo e português fluente,
+            Aulas 1:1, método personalizado, foco total em speaking, sem julgamento.
           </p>
 
         </section>
@@ -49,7 +51,7 @@ export default function Home() {
 
           {/* WHATSAPP */}
           <a
-            href="https://wa.me/5500000000000"
+            href="https://wa.me/5514998139398"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center justify-between bg-[#25D366] text-white p-5 rounded-3xl shadow-xl hover:scale-[1.02] transition duration-300"
@@ -73,7 +75,7 @@ export default function Home() {
 
           {/* INSTAGRAM */}
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/teacher.esterneves?igsh=b3BvZDBwa3I4Z3Rt"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center justify-between bg-white/70 backdrop-blur-xl border border-white/60 p-5 rounded-3xl shadow-lg hover:scale-[1.02] transition duration-300"
@@ -99,7 +101,7 @@ export default function Home() {
 
           {/* YOUTUBE */}
           <a
-            href="https://youtube.com"
+            href="https://www.youtube.com/@inglesbyneves"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center justify-between bg-white/70 backdrop-blur-xl border border-white/60 p-5 rounded-3xl shadow-lg hover:scale-[1.02] transition duration-300"
@@ -125,7 +127,7 @@ export default function Home() {
 
           {/* TIKTOK */}
           <a
-            href="https://tiktok.com"
+            href="https://www.tiktok.com/@inglesbyneves"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center justify-between bg-white/70 backdrop-blur-xl border border-white/60 p-5 rounded-3xl shadow-lg hover:scale-[1.02] transition duration-300"
@@ -151,7 +153,7 @@ export default function Home() {
 
           {/* FACEBOOK */}
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/profile.php?id=61588798522914"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center justify-between bg-white/70 backdrop-blur-xl border border-white/60 p-5 rounded-3xl shadow-lg hover:scale-[1.02] transition duration-300"
@@ -166,6 +168,32 @@ export default function Home() {
 
                 <p className="text-sm text-gray-500">
                   Comunidade e novidades
+                </p>
+              </div>
+            </div>
+
+            <span className="text-xl group-hover:translate-x-1 transition">
+              →
+            </span>
+          </a>
+
+          {/* SPOTIFY */}
+          <a
+            href="https://spotify.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center justify-between bg-white/70 backdrop-blur-xl border border-white/60 p-5 rounded-3xl shadow-lg hover:scale-[1.02] transition duration-300"
+          >
+            <div className="flex items-center gap-4">
+              <span className="text-3xl">🎧</span>
+
+              <div>
+                <p className="font-semibold text-lg">
+                  Spotify
+                </p>
+
+                <p className="text-sm text-gray-500">
+                  Podcasts e playlists
                 </p>
               </div>
             </div>
@@ -227,7 +255,7 @@ export default function Home() {
 
         {/* FOOTER */}
         <footer className="text-center mt-12 text-sm text-gray-500">
-          © 2026 Inglês by Neves
+          © 2026 TerrarTcriativ
         </footer>
 
       </div>
