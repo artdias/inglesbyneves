@@ -24,14 +24,22 @@ export default function Home() {
         {/* PERFIL */}
         <section className="max-w-md mx-auto text-center mt-6">
 
-          <div className="relative w-fit mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-r from-pink-300 to-blue-300 rounded-full blur-xl opacity-60"></div>
+          <div className="relative max-w-sm mx-auto">
 
-            <img
-              src="/perfil.jpg"
-              alt="Teacher Ester Neves"
-              className="relative w-36 h-36 rounded-full object-cover border-4 border-white shadow-2xl"
-            />
+            {/* GLOW */}
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-300 via-purple-200 to-blue-300 rounded-[2.5rem] blur-2xl opacity-50 scale-105"></div>
+
+            {/* CARD FOTO */}
+            <div className="relative bg-white/60 backdrop-blur-xl border border-white/50 rounded-[2.5rem] p-3 shadow-2xl">
+
+              <img
+                src="/perfil.jpg"
+                alt="Professora Ester Neves"
+                className="w-full h-[420px] object-cover rounded-[2rem]"
+              />
+
+            </div>
+
           </div>
 
           <h1 className="text-4xl font-bold mt-6 text-[#1f1f1f]">
