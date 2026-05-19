@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { LogOut, Bell, User, Moon, Sun, Globe, CheckCircle, X } from "lucide-react";
+import { LogOut, Bell, User, Moon, Sun, Globe, CheckCircle, X, GraduationCap } from "lucide-react";
 import { useAppContext } from "../providers";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -92,6 +92,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               </div>
             )}
           </div>
+          <Link href="/teacher" className="p-2 text-brand-taupe hover:text-brand-navy dark:hover:text-brand-beige rounded-sm hover:bg-brand-beige/50 dark:hover:bg-brand-navy transition-colors flex items-center gap-2 group" title="Teacher Area">
+            <GraduationCap size={20} className="group-hover:text-brand-mauve dark:group-hover:text-brand-peach transition-colors" />
+            <span className="hidden md:block text-xs font-bold uppercase tracking-wider text-brand-navy dark:text-brand-beige group-hover:text-brand-mauve dark:group-hover:text-brand-peach transition-colors">Teacher</span>
+          </Link>
           <div className="h-6 w-px bg-brand-taupe/30 hidden sm:block"></div>
           <Link href="/dashboard/profile" className="flex items-center gap-3 cursor-pointer group">
             <div className="text-right hidden sm:block">

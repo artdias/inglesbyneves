@@ -1,13 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { LayoutDashboard, Users, FileVideo, Calendar, Settings, LogOut, Sun, Moon } from "lucide-react";
+import { LayoutDashboard, Users, FileVideo, Calendar, Settings, LogOut, Sun, Moon, Menu, X, User } from "lucide-react";
 import { useAppContext } from "../providers";
 import { usePathname } from "next/navigation";
 
 export default function TeacherLayout({ children }: { children: React.ReactNode }) {
   const { theme, toggleTheme } = useAppContext();
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
     { name: "Overview", href: "/teacher", icon: <LayoutDashboard size={18} /> },
@@ -20,8 +22,8 @@ export default function TeacherLayout({ children }: { children: React.ReactNode 
   return (
     <div className="flex h-screen bg-brand-beige/20 dark:bg-brand-navy-dark font-sans text-brand-navy dark:text-brand-beige transition-colors duration-300">
       
-      {/* Sidebar */}
-      <aside className="w-64 bg-white dark:bg-[#0a0f1c] border-r border-brand-taupe/20 flex flex-col hidden md:flex transition-colors duration-300">
+      {/* Sidebar - Desktop & Mobile */}
+      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-[#0a0f1c] border-r border-brand-taupe/20 flex flex-col transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="p-6 border-b border-brand-taupe/20 flex items-center justify-between">
           <Link href="/teacher" className="flex items-center gap-3">
              <div className="flex flex-col">
@@ -33,6 +35,9 @@ export default function TeacherLayout({ children }: { children: React.ReactNode 
               </span>
             </div>
           </Link>
+          <button onClick={() => setIsMobileMenuOpen(false)} className="md:hidden text-brand-taupe hover:text-brand-mauve">
+            <X size={20} />
+          </button>
         </div>
 
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
@@ -42,6 +47,7 @@ export default function TeacherLayout({ children }: { children: React.ReactNode 
               <Link 
                 key={item.href} 
                 href={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-sm transition-colors text-sm font-medium ${isActive ? 'bg-brand-mauve text-white shadow-sm' : 'text-brand-navy/70 dark:text-brand-taupe hover:bg-brand-beige/50 dark:hover:bg-brand-navy/50'}`}
               >
                 {item.icon}
@@ -52,6 +58,10 @@ export default function TeacherLayout({ children }: { children: React.ReactNode 
         </nav>
 
         <div className="p-4 border-t border-brand-taupe/20 space-y-2">
+          <Link href="/dashboard" className="flex items-center gap-3 px-4 py-3 w-full rounded-sm transition-colors text-sm font-medium text-brand-navy/70 dark:text-brand-taupe hover:bg-brand-beige/50 dark:hover:bg-brand-navy/50">
+            <User size={18} />
+            Student Dashboard
+          </Link>
           <button onClick={toggleTheme} className="flex items-center gap-3 px-4 py-3 w-full rounded-sm transition-colors text-sm font-medium text-brand-navy/70 dark:text-brand-taupe hover:bg-brand-beige/50 dark:hover:bg-brand-navy/50">
             {theme === "light" ? <Moon size={18}/> : <Sun size={18}/>}
             Toggle Theme
@@ -63,17 +73,27 @@ export default function TeacherLayout({ children }: { children: React.ReactNode 
         </div>
       </aside>
 
+      {/* Overlay for mobile */}
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-brand-navy-dark/50 backdrop-blur-sm z-40 md:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        ></div>
+      )}
+
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto w-full">
         {/* Mobile Header */}
-        <header className="md:hidden bg-white dark:bg-[#0a0f1c] border-b border-brand-taupe/20 p-4 flex items-center justify-between sticky top-0 z-40">
+        <header className="md:hidden bg-white dark:bg-[#0a0f1c] border-b border-brand-taupe/20 p-4 flex items-center justify-between sticky top-0 z-30">
            <span className="font-serif font-bold tracking-widest text-brand-navy dark:text-brand-beige uppercase">
               Admin
             </span>
-            {/* Mobile menu toggle would go here */}
+            <button onClick={() => setIsMobileMenuOpen(true)} className="p-2 text-brand-taupe hover:text-brand-mauve">
+              <Menu size={24} />
+            </button>
         </header>
 
-        <div className="p-6 md:p-10 max-w-7xl mx-auto">
+        <div className="p-4 md:p-6 lg:p-10 max-w-7xl mx-auto">
           {children}
         </div>
       </main>

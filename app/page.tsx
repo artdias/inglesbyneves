@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check, BookOpen, ArrowRight, Sun, Moon, Globe } from "lucide-react";
+import { Check, BookOpen, ArrowRight, Sun, Moon, Globe, Menu, X } from "lucide-react";
 import { useAppContext } from "./providers";
 
 export default function Home() {
@@ -34,7 +34,7 @@ export default function Home() {
             <div className="hidden md:flex items-center gap-8">
               <a href="#methodology" className="text-sm tracking-wide text-brand-navy/70 dark:text-brand-beige/70 hover:text-brand-mauve dark:hover:text-brand-peach transition-colors">{t("methodology")}</a>
               <a href="#courses" className="text-sm tracking-wide text-brand-navy/70 dark:text-brand-beige/70 hover:text-brand-mauve dark:hover:text-brand-peach transition-colors">{t("courses")}</a>
-              <a href="#pricing" className="text-sm tracking-wide text-brand-navy/70 dark:text-brand-beige/70 hover:text-brand-mauve dark:hover:text-brand-peach transition-colors">{t("pricing")}</a>
+              <a href="#contact" className="text-sm tracking-wide text-brand-navy/70 dark:text-brand-beige/70 hover:text-brand-mauve dark:hover:text-brand-peach transition-colors">{t("contact")}</a>
 
               {/* Toggles */}
               <div className="flex items-center gap-3 ml-4">
@@ -55,8 +55,36 @@ export default function Home() {
                 {t("start")}
               </Link>
             </div>
+            {/* Mobile Menu Toggle */}
+            <div className="md:hidden flex items-center gap-4">
+               <button onClick={toggleLanguage} className="p-2 text-brand-taupe hover:text-brand-navy dark:hover:text-brand-beige rounded-full" title="Switch Language">
+                 <Globe size={20}/>
+               </button>
+               <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 text-brand-taupe hover:text-brand-navy dark:hover:text-brand-beige rounded-full">
+                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+               </button>
+            </div>
           </div>
         </div>
+        
+        {/* Mobile Menu Overlay */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-[#0a0f1c] border-b border-brand-taupe/20 shadow-xl py-6 px-4 flex flex-col gap-6 z-50 transition-colors">
+            <a href="#methodology" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium text-brand-navy dark:text-white">{t("methodology")}</a>
+            <a href="#courses" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium text-brand-navy dark:text-white">{t("courses")}</a>
+            <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium text-brand-navy dark:text-white">{t("contact")}</a>
+            <div className="w-full h-px bg-brand-taupe/20"></div>
+            <div className="flex items-center justify-between">
+              <span className="text-brand-taupe font-medium">Dark Mode</span>
+              <button onClick={toggleTheme} className="p-2 bg-brand-beige/30 dark:bg-brand-navy/50 rounded-sm text-brand-navy dark:text-brand-beige">
+                 {theme === "light" ? <Moon size={20}/> : <Sun size={20}/>}
+              </button>
+            </div>
+            <Link href="/dashboard" onClick={() => setIsMenuOpen(false)} className="w-full text-center bg-brand-navy dark:bg-brand-beige text-white dark:text-brand-navy py-3.5 rounded-sm font-medium tracking-wide">
+              {t("portal")}
+            </Link>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
@@ -76,7 +104,7 @@ export default function Home() {
               {t("heroDesc")}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <Link href="#pricing" className="bg-brand-mauve hover:bg-brand-dark text-white px-8 py-4 rounded-sm text-sm tracking-wider uppercase font-medium transition-all flex items-center justify-center gap-3">
+              <Link href="#contact" className="bg-brand-mauve hover:bg-brand-dark text-white px-8 py-4 rounded-sm text-sm tracking-wider uppercase font-medium transition-all flex items-center justify-center gap-3">
                 {t("start")} <ArrowRight className="w-4 h-4" />
               </Link>
               <Link href="/material" className="bg-transparent hover:bg-brand-beige/50 dark:hover:bg-brand-navy text-brand-navy dark:text-brand-beige px-8 py-4 rounded-sm text-sm tracking-wider uppercase font-medium border border-brand-taupe dark:border-brand-taupe/40 transition-all flex items-center justify-center gap-3">
@@ -108,16 +136,16 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-20 items-center">
             <div className="mb-16 lg:mb-0">
-              <h2 className="text-4xl md:text-5xl font-serif text-brand-navy dark:text-white mb-8 leading-tight">Elevated methodology for modern professionals.</h2>
+              <h2 className="text-4xl md:text-5xl font-serif text-brand-navy dark:text-white mb-8 leading-tight">{t("methodologyTitle")}</h2>
               <p className="text-lg text-brand-navy/70 dark:text-brand-beige/70 mb-10 leading-relaxed font-light">
-                We focus on active speaking, real-world context, and continuous feedback. You won't just learn grammar; you will learn how to communicate your ideas effectively with confidence and elegance.
+                {t("methodologyDesc")}
               </p>
               <ul className="space-y-6">
                 {[
-                  "Live 1-on-1 speaking practice",
-                  "Access to exclusive interactive platform",
-                  "Personalized feedback on pronunciation",
-                  "Real-world business vocabulary"
+                  t("methodologyPoint1"),
+                  t("methodologyPoint2"),
+                  t("methodologyPoint3"),
+                  t("methodologyPoint4")
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-4">
                     <div className="mt-1 flex-shrink-0">
@@ -141,52 +169,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-32 bg-brand-beige/20 dark:bg-brand-navy-dark transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-serif text-brand-navy dark:text-white mb-6">Simple, transparent pricing.</h2>
-          <p className="text-lg text-brand-navy/60 dark:text-brand-beige/60 mb-20 max-w-2xl mx-auto font-light">Choose the plan that fits your ambition. No hidden fees or long-term lock-ins.</p>
+      {/* Contact Section */}
+      <section id="contact" className="py-32 bg-brand-beige/20 dark:bg-brand-navy-dark transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-serif text-brand-navy dark:text-white mb-6">{t("contactTitle")}</h2>
+            <p className="text-lg text-brand-navy/60 dark:text-brand-beige/60 font-light">{t("contactDesc")}</p>
+          </div>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Plan 1 */}
-            <div className="bg-white dark:bg-[#0a0f1c] p-12 border border-brand-taupe/30 text-left flex flex-col transition-all hover:border-brand-taupe">
-              <h3 className="text-2xl font-serif text-brand-navy dark:text-white mb-2">Self-Paced</h3>
-              <p className="text-brand-taupe mb-8 text-sm tracking-wide">For independent learners.</p>
-              <div className="mb-10">
-                <span className="text-5xl font-serif text-brand-navy dark:text-white">R$ 97</span>
-                <span className="text-brand-taupe text-sm uppercase tracking-widest ml-2">/mo</span>
+          <div className="max-w-2xl mx-auto bg-white dark:bg-[#0a0f1c] p-8 md:p-12 border border-brand-taupe/30 shadow-xl relative">
+            <form className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-[10px] font-bold text-brand-taupe uppercase tracking-widest mb-2">{t("contactName")}</label>
+                  <input type="text" className="w-full px-4 py-3 bg-brand-beige/10 dark:bg-brand-navy/20 border border-brand-taupe/30 rounded-sm text-brand-navy dark:text-brand-beige focus:outline-none focus:border-brand-mauve transition-colors" />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold text-brand-taupe uppercase tracking-widest mb-2">{t("contactEmail")}</label>
+                  <input type="email" className="w-full px-4 py-3 bg-brand-beige/10 dark:bg-brand-navy/20 border border-brand-taupe/30 rounded-sm text-brand-navy dark:text-brand-beige focus:outline-none focus:border-brand-mauve transition-colors" />
+                </div>
               </div>
-              <ul className="space-y-5 mb-12 flex-1">
-                <li className="flex items-center gap-4"><Check className="w-5 h-5 text-brand-mauve" /> <span className="text-brand-navy/80 dark:text-brand-beige/80">All Video Modules</span></li>
-                <li className="flex items-center gap-4"><Check className="w-5 h-5 text-brand-mauve" /> <span className="text-brand-navy/80 dark:text-brand-beige/80">Exercises & Quizzes</span></li>
-                <li className="flex items-center gap-4"><Check className="w-5 h-5 text-brand-mauve" /> <span className="text-brand-navy/80 dark:text-brand-beige/80">Community Access</span></li>
-              </ul>
-              <Link href="/dashboard" className="w-full block text-center bg-transparent border border-brand-navy dark:border-brand-beige text-brand-navy dark:text-brand-beige hover:bg-brand-navy hover:text-white dark:hover:bg-brand-beige dark:hover:text-brand-navy py-4 text-sm tracking-widest uppercase font-medium transition-colors">
-                Start Self-Paced
-              </Link>
-            </div>
-            
-            {/* Plan 2 */}
-            <div className="bg-brand-navy dark:bg-brand-beige p-12 text-left flex flex-col relative transform md:-translate-y-6 shadow-xl">
-              <div className="absolute top-0 right-10 transform -translate-y-1/2 bg-brand-mauve text-white px-4 py-1.5 text-xs tracking-widest uppercase font-semibold">
-                Most Popular
+              <div>
+                <label className="block text-[10px] font-bold text-brand-taupe uppercase tracking-widest mb-2">{t("contactMessage")}</label>
+                <textarea rows={5} className="w-full px-4 py-3 bg-brand-beige/10 dark:bg-brand-navy/20 border border-brand-taupe/30 rounded-sm text-brand-navy dark:text-brand-beige focus:outline-none focus:border-brand-mauve transition-colors resize-none"></textarea>
               </div>
-              <h3 className="text-2xl font-serif text-white dark:text-brand-navy mb-2">Premium Mentorship</h3>
-              <p className="text-white/60 dark:text-brand-navy/60 mb-8 text-sm tracking-wide">For fast-track fluency.</p>
-              <div className="mb-10">
-                <span className="text-5xl font-serif text-white dark:text-brand-navy">R$ 297</span>
-                <span className="text-white/60 dark:text-brand-navy/60 text-sm uppercase tracking-widest ml-2">/mo</span>
-              </div>
-              <ul className="space-y-5 mb-12 flex-1">
-                <li className="flex items-center gap-4"><Check className="w-5 h-5 text-brand-peach dark:text-brand-mauve" /> <span className="text-white/90 dark:text-brand-navy/90">Everything in Self-Paced</span></li>
-                <li className="flex items-center gap-4"><Check className="w-5 h-5 text-brand-peach dark:text-brand-mauve" /> <span className="text-white dark:text-brand-navy font-semibold">4 Live 1-on-1 Sessions/mo</span></li>
-                <li className="flex items-center gap-4"><Check className="w-5 h-5 text-brand-peach dark:text-brand-mauve" /> <span className="text-white/90 dark:text-brand-navy/90">WhatsApp Support</span></li>
-                <li className="flex items-center gap-4"><Check className="w-5 h-5 text-brand-peach dark:text-brand-mauve" /> <span className="text-white/90 dark:text-brand-navy/90">Correction of written essays</span></li>
-              </ul>
-              <Link href="/dashboard" className="w-full block text-center bg-brand-peach hover:bg-white text-brand-navy py-4 text-sm tracking-widest uppercase font-medium transition-colors">
-                {t("joinMentorship")}
-              </Link>
-            </div>
+              <button type="button" className="w-full block text-center bg-brand-mauve hover:bg-brand-dark text-white py-4 text-sm tracking-widest uppercase font-medium transition-colors">
+                {t("contactSend")}
+              </button>
+            </form>
           </div>
         </div>
       </section>
