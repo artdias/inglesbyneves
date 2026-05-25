@@ -5,9 +5,11 @@ import { useRouter } from "next/navigation";
 import { createClient } from "../../utils/supabase/client";
 import { useAppContext } from "../providers";
 import Link from "next/link";
-import { ArrowLeft, Mail, Lock } from "lucide-react";
+import { ArrowLeft, Mail, Lock, User } from "lucide-react";
 
-export default function LoginPage() {
+export default function SignupPage() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -16,23 +18,31 @@ export default function LoginPage() {
   const supabase = createClient();
   const { t } = useAppContext();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const { error } = await supabase.auth.signInWithPassword({
+    // Sign up the user
+    const { data, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+        },
+      },
     });
 
-    if (error) {
-      setError(error.message);
+    if (signUpError) {
+      setError(signUpError.message);
       setLoading(false);
-    } else {
-      router.push("/dashboard");
-      router.refresh();
+      return;
     }
+
+    router.push("/dashboard");
+    router.refresh();
   };
 
   return (
@@ -49,8 +59,8 @@ export default function LoginPage() {
               <img src="/logo-dark.svg" alt="Logo" className="w-full h-full hidden dark:block" />
             </div>
           </div>
-          <h1 className="text-3xl font-serif font-bold text-brand-navy dark:text-brand-beige tracking-tight mb-2">Welcome Back</h1>
-          <p className="text-sm text-brand-taupe tracking-wide">Enter your details to access your portal.</p>
+          <h1 className="text-3xl font-serif font-bold text-brand-navy dark:text-brand-beige tracking-tight mb-2">Join Us</h1>
+          <p className="text-sm text-brand-taupe tracking-wide">Create your student account.</p>
         </div>
 
         {error && (
@@ -59,7 +69,42 @@ export default function LoginPage() {
           </div>
         )}
 
-        <form onSubmit={handleLogin} className="space-y-6">
+        <form onSubmit={handleSignup} className="space-y-6">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label className="block text-[10px] font-bold text-brand-taupe uppercase tracking-widest">First Name</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <User size={16} className="text-brand-taupe" />
+                </div>
+                <input 
+                  type="text" 
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required
+                  className="w-full pl-11 pr-4 py-3 bg-brand-beige/10 dark:bg-brand-navy/20 border border-brand-taupe/30 rounded-sm text-brand-navy dark:text-brand-beige focus:outline-none focus:border-brand-mauve transition-colors"
+                  placeholder="John"
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <label className="block text-[10px] font-bold text-brand-taupe uppercase tracking-widest">Last Name</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <User size={16} className="text-brand-taupe" />
+                </div>
+                <input 
+                  type="text" 
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required
+                  className="w-full pl-11 pr-4 py-3 bg-brand-beige/10 dark:bg-brand-navy/20 border border-brand-taupe/30 rounded-sm text-brand-navy dark:text-brand-beige focus:outline-none focus:border-brand-mauve transition-colors"
+                  placeholder="Doe"
+                />
+              </div>
+            </div>
+          </div>
+
           <div className="space-y-2">
             <label className="block text-[10px] font-bold text-brand-taupe uppercase tracking-widest">Email Address</label>
             <div className="relative">
@@ -78,10 +123,7 @@ export default function LoginPage() {
           </div>
 
           <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <label className="block text-[10px] font-bold text-brand-taupe uppercase tracking-widest">Password</label>
-              <Link href="/forgot-password" className="text-[10px] font-bold text-brand-mauve uppercase tracking-widest hover:text-brand-dark transition-colors">Forgot?</Link>
-            </div>
+            <label className="block text-[10px] font-bold text-brand-taupe uppercase tracking-widest">Password</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <Lock size={16} className="text-brand-taupe" />
@@ -93,6 +135,7 @@ export default function LoginPage() {
                 required
                 className="w-full pl-11 pr-4 py-3 bg-brand-beige/10 dark:bg-brand-navy/20 border border-brand-taupe/30 rounded-sm text-brand-navy dark:text-brand-beige focus:outline-none focus:border-brand-mauve transition-colors"
                 placeholder="••••••••"
+                minLength={6}
               />
             </div>
           </div>
@@ -105,14 +148,14 @@ export default function LoginPage() {
             {loading ? (
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
             ) : (
-              "Sign In"
+              "Sign Up"
             )}
           </button>
         </form>
         
         <div className="mt-8 text-center border-t border-brand-taupe/10 pt-6">
           <p className="text-xs text-brand-taupe">
-            Don't have an account? <Link href="/signup" className="font-bold text-brand-mauve hover:text-brand-dark uppercase tracking-widest ml-1 transition-colors">Sign Up</Link>
+            Already have an account? <Link href="/login" className="font-bold text-brand-mauve hover:text-brand-dark uppercase tracking-widest ml-1 transition-colors">Sign In</Link>
           </p>
         </div>
       </div>

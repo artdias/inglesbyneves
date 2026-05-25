@@ -1,15 +1,51 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { LayoutDashboard, Users, FileVideo, Calendar, Settings, LogOut, Sun, Moon, Menu, X, User } from "lucide-react";
 import { useAppContext } from "../providers";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { createClient } from "../../utils/supabase/client";
+
 
 export default function TeacherLayout({ children }: { children: React.ReactNode }) {
   const { theme, toggleTheme } = useAppContext();
   const pathname = usePathname();
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
+  const supabase = createClient();
+
+  useEffect(() => {
+    async function checkAccess() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        router.push("/login");
+        return;
+      }
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+
+      if (profile?.role === "teacher") {
+        setIsAuthorized(true);
+      } else {
+        router.push("/dashboard");
+      }
+    }
+    checkAccess();
+  }, [router, supabase]);
+
+  if (isAuthorized === null) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-brand-beige/20 dark:bg-brand-navy-dark">
+        <div className="w-8 h-8 border-2 border-brand-taupe/30 border-t-brand-mauve rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   const navItems = [
     { name: "Overview", href: "/teacher", icon: <LayoutDashboard size={18} /> },
