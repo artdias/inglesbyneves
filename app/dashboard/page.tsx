@@ -130,7 +130,7 @@ export default function Dashboard() {
                          {new Date(s.start_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                       </span>
                     </div>
-                    <p className="text-sm text-brand-taupe mb-5 leading-relaxed">{s.description || "Join us for this scheduled session. Please make sure your camera is ready and you are in a quiet environment."}</p>
+                    <p className="text-sm text-brand-taupe mb-5 leading-relaxed">Join us for this scheduled session. Please make sure your camera is ready and you are in a quiet environment.</p>
                     
                     <div className="flex flex-wrap gap-3">
                       {s.call_link ? (
@@ -142,9 +142,6 @@ export default function Dashboard() {
                           No Link
                         </span>
                       )}
-                      <Link href={`/dashboard/modules/${s.module_id || ''}`} className="flex-1 text-center border border-brand-taupe/30 hover:bg-brand-beige dark:hover:bg-brand-navy text-brand-navy dark:text-brand-beige px-4 py-2.5 rounded-sm text-xs font-bold uppercase tracking-wider transition-colors inline-block">
-                        View Lesson
-                      </Link>
                     </div>
                  </div>
                ))}

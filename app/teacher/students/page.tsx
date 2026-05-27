@@ -73,8 +73,7 @@ export default function TeacherStudentsPage() {
 
   const filteredStudents = students.filter(s => {
     const fullName = `${s.first_name || ""} ${s.last_name || ""}`.trim().toLowerCase();
-    return fullName.includes(searchQuery.toLowerCase()) ||
-    s.email?.toLowerCase().includes(searchQuery.toLowerCase());
+    return fullName.includes(searchQuery.toLowerCase());
   });
 
   return (
@@ -121,8 +120,7 @@ export default function TeacherStudentsPage() {
                     <tr key={student.id} className="hover:bg-brand-beige/5 dark:hover:bg-brand-navy/20 transition-colors group">
                       <td className="px-6 py-4">
                         <div className="ml-4">
-                          <p className="font-bold">{`${student.first_name || ""} ${student.last_name || ""}`.trim() || "Unnamed Student"}</p>
-                          <p className="text-xs text-brand-taupe">{student.email}</p>
+                          <p className="font-bold">{`${student.first_name || ""} ${student.last_name || ""}`.trim() || "Unknown Student"}</p>
                         </div>
                       </td>
                       <td className="px-6 py-4">
@@ -141,9 +139,6 @@ export default function TeacherStudentsPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4 flex items-center justify-end gap-3">
-                        <a href={`mailto:${student.email}`} className="text-brand-taupe hover:text-brand-mauve transition-colors" title="Email Student">
-                          <Mail size={16} />
-                        </a>
                       </td>
                     </tr>
                   )

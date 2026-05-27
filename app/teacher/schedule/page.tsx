@@ -136,7 +136,7 @@ export default function TeacherSchedulePage() {
                     <option value="">No specific student (Group Class)</option>
                     {students.map(s => (
                       <option key={s.id} value={s.id}>
-                        {`${s.first_name || ""} ${s.last_name || ""}`.trim() || s.email}
+                        {`${s.first_name || ""} ${s.last_name || ""}`.trim() || "Unknown Student"}
                       </option>
                     ))}
                   </select>

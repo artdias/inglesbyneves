@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import ReactPlayer from "react-player";
+import ReactPlayerModule from "react-player";
+const ReactPlayer = ReactPlayerModule as any;
 import { MessageSquare, X, Send } from "lucide-react";
 
 interface CustomVideoPlayerProps {
@@ -11,7 +12,7 @@ interface CustomVideoPlayerProps {
 }
 
 export function CustomVideoPlayer({ url, title, onQuestionSubmit }: CustomVideoPlayerProps) {
-  const playerRef = useRef<ReactPlayer>(null);
+  const playerRef = useRef<any>(null);
   const [isClient, setIsClient] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [question, setQuestion] = useState("");
@@ -69,11 +70,6 @@ export function CustomVideoPlayer({ url, title, onQuestionSubmit }: CustomVideoP
           playing={playing}
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
-          config={{
-            youtube: {
-              playerVars: { showinfo: 1 }
-            }
-          }}
         />
       </div>
 
