@@ -133,9 +133,15 @@ export default function Dashboard() {
                     <p className="text-sm text-brand-taupe mb-5 leading-relaxed">{s.description || "Join us for this scheduled session. Please make sure your camera is ready and you are in a quiet environment."}</p>
                     
                     <div className="flex flex-wrap gap-3">
-                      <Link href="/dashboard/schedule" className="flex-1 text-center bg-brand-mauve hover:bg-brand-dark text-white px-4 py-2.5 rounded-sm text-xs font-bold uppercase tracking-wider transition-colors inline-block">
-                        Join Class
-                      </Link>
+                      {s.call_link ? (
+                        <a href={s.call_link} target="_blank" rel="noopener noreferrer" className="flex-1 text-center bg-brand-mauve hover:bg-brand-dark text-white px-4 py-2.5 rounded-sm text-xs font-bold uppercase tracking-wider transition-colors inline-block">
+                          Join Call
+                        </a>
+                      ) : (
+                        <span className="flex-1 text-center bg-brand-taupe/30 text-brand-taupe px-4 py-2.5 rounded-sm text-xs font-bold uppercase tracking-wider inline-block cursor-not-allowed">
+                          No Link
+                        </span>
+                      )}
                       <Link href={`/dashboard/modules/${s.module_id || ''}`} className="flex-1 text-center border border-brand-taupe/30 hover:bg-brand-beige dark:hover:bg-brand-navy text-brand-navy dark:text-brand-beige px-4 py-2.5 rounded-sm text-xs font-bold uppercase tracking-wider transition-colors inline-block">
                         View Lesson
                       </Link>
@@ -173,12 +179,12 @@ export default function Dashboard() {
             </div>
             {t("resume")}
           </Link>
-          <Link href="/dashboard/schedule" className="flex items-center gap-4 p-3 rounded-sm hover:bg-brand-beige/50 dark:hover:bg-brand-navy/30 text-brand-navy dark:text-brand-beige hover:text-brand-dark dark:hover:text-brand-peach font-medium transition-colors group">
+          <a href={displayedSchedule.length > 0 && displayedSchedule[0].call_link ? displayedSchedule[0].call_link : "#"} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-3 rounded-sm hover:bg-brand-beige/50 dark:hover:bg-brand-navy/30 text-brand-navy dark:text-brand-beige hover:text-brand-dark dark:hover:text-brand-peach font-medium transition-colors group">
             <div className="w-10 h-10 rounded-sm bg-brand-peach/30 dark:bg-brand-navy text-brand-dark dark:text-brand-peach flex items-center justify-center group-hover:scale-105 transition-transform border border-brand-taupe/20">
               <ExternalLink size={18} strokeWidth={1.5} />
             </div>
             {t("zoom")}
-          </Link>
+          </a>
         </div>
 
         {/* Modules List */}
@@ -328,13 +334,18 @@ export default function Dashboard() {
                        <span className="text-brand-mauve dark:text-brand-peach text-[10px] uppercase font-bold tracking-widest">{monthStr}</span>
                        <span className="text-brand-navy dark:text-brand-beige text-xl font-serif font-bold group-hover:text-brand-mauve transition-colors mt-0.5">{dayNum}</span>
                      </div>
-                     <div className="flex flex-col justify-center">
-                        <h4 className="font-semibold text-brand-navy dark:text-brand-beige group-hover:text-brand-mauve transition-colors tracking-wide">{s.title}</h4>
-                        <p className="text-xs text-brand-taupe flex items-center gap-1.5 mt-2 font-medium uppercase tracking-wider">
-                          <Clock size={12} className="text-brand-mauve"/> {timeStr} - {s.level}
-                        </p>
-                     </div>
-                   </div>
+                      <div className="flex flex-col justify-center">
+                         <h4 className="font-semibold text-brand-navy dark:text-brand-beige group-hover:text-brand-mauve transition-colors tracking-wide">{s.title}</h4>
+                         <p className="text-xs text-brand-taupe flex items-center gap-1.5 mt-2 font-medium uppercase tracking-wider">
+                           <Clock size={12} className="text-brand-mauve"/> {timeStr} - {s.level}
+                         </p>
+                         {s.call_link && (
+                           <a href={s.call_link} target="_blank" rel="noopener noreferrer" className="mt-2 text-[10px] uppercase tracking-widest font-bold text-brand-mauve hover:text-brand-navy transition-colors flex items-center gap-1 w-fit bg-brand-mauve/10 px-2 py-1 rounded-sm border border-brand-mauve/20">
+                              Join Call <ChevronRight size={12}/>
+                           </a>
+                         )}
+                      </div>
+                    </div>
                  );
                })
              )}
