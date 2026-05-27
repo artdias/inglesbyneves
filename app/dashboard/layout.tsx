@@ -236,7 +236,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                             <div>
                               <p className={`text-sm ${!n.is_read ? 'font-bold text-brand-navy dark:text-white' : 'font-medium text-brand-navy/80 dark:text-brand-beige/80'}`}>{n.title}</p>
                               <p className="text-xs text-brand-taupe mt-1">{n.content}</p>
-                              <p className="text-[10px] text-brand-taupe/70 font-mono mt-2 uppercase tracking-widest">{new Date(n.created_at).toLocaleDateString()}</p>
+                              <p className="text-[10px] text-brand-taupe font-mono mt-2 uppercase tracking-widest">{n.created_at ? new Date(n.created_at).toLocaleDateString() : ''}</p>
                             </div>
                           </div>
                         </div>
