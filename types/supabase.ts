@@ -111,6 +111,8 @@ export interface Database {
           start_time: string
           end_time: string
           level: string
+          student_id: string | null
+          call_link: string | null
           created_at: string
         }
         Insert: {
@@ -119,6 +121,8 @@ export interface Database {
           start_time: string
           end_time: string
           level: string
+          student_id?: string | null
+          call_link?: string | null
           created_at?: string
         }
         Update: {
@@ -127,6 +131,8 @@ export interface Database {
           start_time?: string
           end_time?: string
           level?: string
+          student_id?: string | null
+          call_link?: string | null
           created_at?: string
         }
       }
@@ -209,6 +215,113 @@ export interface Database {
           feedback?: string | null
           teacher_id?: string | null
           graded_at?: string
+        }
+      }
+      notifications: {
+        Row: {
+          id: string
+          user_id: string | null
+          title: string
+          content: string
+          type: string | null
+          is_read: boolean | null
+          created_at: string | null
+        }
+        Insert: {
+          id?: string
+          user_id?: string | null
+          title: string
+          content: string
+          type?: string | null
+          is_read?: boolean | null
+          created_at?: string | null
+        }
+        Update: {
+          id?: string
+          user_id?: string | null
+          title?: string
+          content?: string
+          type?: string | null
+          is_read?: boolean | null
+          created_at?: string | null
+        }
+      }
+      chat_messages: {
+        Row: {
+          id: string
+          sender_id: string | null
+          receiver_id: string | null
+          content: string
+          is_read: boolean | null
+          created_at: string | null
+        }
+        Insert: {
+          id?: string
+          sender_id?: string | null
+          receiver_id?: string | null
+          content: string
+          is_read?: boolean | null
+          created_at?: string | null
+        }
+        Update: {
+          id?: string
+          sender_id?: string | null
+          receiver_id?: string | null
+          content?: string
+          is_read?: boolean | null
+          created_at?: string | null
+        }
+      }
+      lessons: {
+        Row: {
+          id: string
+          module_id: string | null
+          title: string
+          description: string | null
+          video_url: string
+          duration: string
+          order_index: number
+          created_at: string | null
+        }
+        Insert: {
+          id?: string
+          module_id?: string | null
+          title: string
+          description?: string | null
+          video_url: string
+          duration: string
+          order_index?: number
+          created_at?: string | null
+        }
+        Update: {
+          id?: string
+          module_id?: string | null
+          title?: string
+          description?: string | null
+          video_url?: string
+          duration?: string
+          order_index?: number
+          created_at?: string | null
+        }
+      }
+      lesson_completions: {
+        Row: {
+          id: string
+          student_id: string | null
+          lesson_id: string | null
+          completed_at: string | null
+        }
+        Insert: {
+          id?: string
+          student_id?: string | null
+          lesson_id?: string | null
+          completed_at?: string | null
+        }
+        Update: {
+          id?: string
+          student_id?: string | null
+          lesson_id?: string | null
+          completed_at?: string | null
         }
       }
     }
